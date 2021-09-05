@@ -1,0 +1,117 @@
+
+img{
+    width: 100%;
+}
+.container-carousel-all{
+    display: flex;
+    align-items: center;
+    height: 440px;
+}
+.container-carousel{
+    position: relative; 
+    overflow: hidden;
+    align-items: center;
+}
+.slide{
+    display: flex;
+    transform: translate3d(0,0,0);
+    transition: all 600ms;
+    animation-duration: 6s;
+    animation-direction:alternate;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    max-width: 100%;
+}
+.item-slide{
+    position:relative;
+    display:flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-width: 100%;
+}
+.item-slide img{
+    margin: auto;
+}
+.carousel-pagination{
+    margin-top: 17px;
+    position: relative;
+    bottom: 20px;
+    left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: space-around;
+}
+.pagination-item{
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    border:2px solid rgb(165, 165, 165);
+    width: 42px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 0 ;
+    transition: all 300ms;
+}
+.pagination-item:hover{
+    transform: scale(1.3);
+}
+.pagination-item img{
+    display: inline-block;
+    max-width:none;
+    height:100%;
+    transform: scale(1);
+}
+input[id="0"]:checked ~ .slide{
+    animation:none;
+    transform: translate3d(0,0,0);
+}
+input[id="0"]:checked ~ .carousel-pagination .pagination-item[for="0"]{
+    border-color:red;
+}
+input[id="1"]:checked ~ .slide{
+    animation:none;
+    transform: translate3d(calc(-100% * 1),0,0);
+}
+input[id="1"]:checked ~ .carousel-pagination .pagination-item[for="1"]{
+    border-color:red;
+}
+
+input[id="2"]:checked ~ .slide{
+    animation:none;
+    transform: translate3d(calc(-100% * 2),0,0);
+}
+input[id="2"]:checked ~ .carousel-pagination .pagination-item[for="2"]{
+    border-color:red;
+}
+
+input[id="3"]:checked ~ .slide{
+    animation:none;
+    transform: translate3d(calc(-100% * 3),0,0);
+}
+input[id="3"]:checked ~ .carousel-pagination .pagination-item[for="3"]{
+    border-color:red;
+}
+@media screen and (min-width:381px) {
+    .container-carousel-all{
+        padding:25px;
+    }
+}
+@media screen and (min-width:315px) {
+    .pagination-item{  
+        width: 60px;
+    }
+}
+@media screen and (min-width:490px) {
+    .pagination-item{  
+        width: 70px;
+    }
+}
+@media screen and (min-width:560px) {
+    .pagination-item{  
+        width: 100px;
+    }
+}
