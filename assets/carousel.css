@@ -1,117 +1,173 @@
 
-img{
+.slide-item img{
     width: 100%;
+    height: auto;
 }
-.container-carousel-all{
+.carousel{
+    position:relative;
+    height:470px;
     display: flex;
-    align-items: center;
-    height: 440px;
+    flex-direction: column;
 }
-.container-carousel{
-    position: relative; 
-    overflow: hidden;
-    align-items: center;
+.wrapper-slide-pagination{
+    position:relative;
+    height: 80%;
 }
 .slide{
+    position: relative;
     display: flex;
-    transform: translate3d(0,0,0);
-    transition: all 600ms;
-    animation-duration: 6s;
-    animation-direction:alternate;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    max-width: 100%;
+    width: 100%;
+    flex-direction: row;
+    overflow:hidden;
+    height:80%;
 }
-.item-slide{
-    position:relative;
+.slide-item{
+    position: absolute;
     display:flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    flex-grow: 0;
-    max-width: 100%;
-}
-.item-slide img{
-    margin: auto;
+    width: 100%;
+    height: 100%;
 }
 .carousel-pagination{
-    margin-top: 17px;
-    position: relative;
-    bottom: 20px;
-    left: 0;
+    position:relative;
+    margin-top:10px;
+    justify-content: space-between;
     display: flex;
-    flex-wrap: wrap;
-    align-items:center;
-    justify-content: space-around;
 }
 .pagination-item{
-    display: flex;
-    flex-direction:column;
-    align-items:center;
     border:2px solid rgb(165, 165, 165);
-    width: 42px;
     border-radius: 12px;
     overflow: hidden;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.5);
-    margin: 0 ;
-    transition: all 300ms;
-}
-.pagination-item:hover{
-    transform: scale(1.3);
 }
 .pagination-item img{
-    display: inline-block;
-    max-width:none;
-    height:100%;
-    transform: scale(1);
+    width: 100%;
+    height: 100%;
 }
-input[id="0"]:checked ~ .slide{
-    animation:none;
-    transform: translate3d(0,0,0);
+.pagination-item:hover{
+    cursor: pointer;
+    transform: scale(1.3);
+    border-color: rgba(196, 22, 22, 0.685);
 }
-input[id="0"]:checked ~ .carousel-pagination .pagination-item[for="0"]{
-    border-color:red;
+.activated{
+    transform: scale(1.1);
+    border-color: rgba(221, 4, 4, 0.685);
 }
-input[id="1"]:checked ~ .slide{
-    animation:none;
-    transform: translate3d(calc(-100% * 1),0,0);
+.carousel button{
+    position: absolute;
+    height: 80%;
+    margin-top:auto;
+    margin-bottom:auto ;
+    top: calc(10%);
+    width:45px;
+    background-color: rgba(185, 185, 185, 0);
+    border:none;
 }
-input[id="1"]:checked ~ .carousel-pagination .pagination-item[for="1"]{
-    border-color:red;
+.carousel button:hover, .carousel button:active{
+    background-color: rgba(221, 221, 221, 0.336);
+    cursor: pointer;
+}
+.next{
+    right:calc(2%);
+}
+.prev{
+    left:calc(2%);
+}
+.characteristics{
+    margin-top: 15px;
+    position: relative;
+    display:flex;
+    flex-direction:row;
+    font-size: 14px;
+    color: #666;
+}
+/*media query */
+@media screen and (max-width:710px) {
+    .carousel{
+        height:500px;
+    }
+}
+@media screen and (max-width:504px) {
+    .carousel{
+        height: 500px;
+    }
+    .wrapper-slide-pagination{
+        height:300px;
+    }
+    .pagination-item{
+    width: 21%;
+    }
+}
+@media screen and (max-width:350px) {
+    .carousel{
+        height: 350px;
+    }
+    .wrapper-slide-pagination{
+        height:200px;
+    }
 }
 
-input[id="2"]:checked ~ .slide{
-    animation:none;
-    transform: translate3d(calc(-100% * 2),0,0);
+/* left animation */
+.left-enter-active{
+    animation:leftInAnimation 0.4s ease-in-out;
 }
-input[id="2"]:checked ~ .carousel-pagination .pagination-item[for="2"]{
-    border-color:red;
+.left-leave-active{
+    animation:leftOutAnimation 0.4s ease-in-out;
+}
+@keyframes leftInAnimation{
+    from {transform: translateX(-100%);}
+    to {transform: translateX(0);}
+}
+@keyframes leftOutAnimation{
+    from {transform: translateX(0);}
+    to {transform: translateX(100%);}
 }
 
-input[id="3"]:checked ~ .slide{
-    animation:none;
-    transform: translate3d(calc(-100% * 3),0,0);
+/* right animation */
+.right-enter-active{
+    animation:rightInAnimation 0.4s ease-in-out;
 }
-input[id="3"]:checked ~ .carousel-pagination .pagination-item[for="3"]{
-    border-color:red;
+.right-leave-active{
+    animation:rightOutAnimation 0.4s ease-in-out;
 }
-@media screen and (min-width:381px) {
-    .container-carousel-all{
-        padding:25px;
-    }
+@keyframes rightInAnimation{
+    from {transform: translateX(100%);}
+    to {transform: translateX(0);}
 }
-@media screen and (min-width:315px) {
-    .pagination-item{  
-        width: 60px;
-    }
+@keyframes rightOutAnimation{
+    from {transform: translateX(0);}
+    to {transform: translateX(-100%);}
 }
-@media screen and (min-width:490px) {
-    .pagination-item{  
-        width: 70px;
-    }
+/* go to begin animation */
+.beginning-enter-active{
+    animation-fill-mode: forwards;
+    animation:beginningInAnimation 0.5s ease-in-out;
 }
-@media screen and (min-width:560px) {
-    .pagination-item{  
-        width: 100px;
-    }
+.beginning-leave-active{
+    animation-fill-mode: forwards;
+    animation:beginningOutAnimation 0.5s ease-in-out;
+}
+@keyframes beginningInAnimation{
+    from {transform: translateX(calc(-100% * 4));}
+    to {transform: translateX(0);}
+}
+@keyframes beginningOutAnimation{
+    from {transform: translateX(0);}
+    to {transform: translateX(calc(100% * 4));}
+}
+
+/*go to the end */
+.end-enter-active{
+    animation-fill-mode: forwards;
+    animation:endInAnimation 0.5s ease-in-out;
+}
+.end-leave-active{
+    animation-fill-mode: forwards;
+    animation:endOutAnimation 0.5s ease-in-out;
+}
+@keyframes endInAnimation{
+    from {transform: translateX(calc(100% * 3));}
+    to {transform: translateX(0);}
+}
+@keyframes endOutAnimation{
+    from {transform: translateX(0);}
+    to {transform: translateX(calc(-100% * 3));}
 }

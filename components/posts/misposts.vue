@@ -33,12 +33,17 @@ export default {
 
 <style>
 .my-main-card-box{
-    margin-top:1rem;
+    position: relative;
+    padding: 1px;
+    margin: 1px;
 }
 .my-main-card-box:hover{
-    margin: 1px;
+    margin: 0px;
+    padding:3px;
+    transform: translate3d(0,-20px,0);
+    transition: 300ms;
     cursor: pointer;
-    border: solid rgba(150, 146, 146, 0.336) 1px;
+    border: solid rgba(150, 146, 146, 0.336) 2px;
     border-radius: 15px;
 }
 .img-card{

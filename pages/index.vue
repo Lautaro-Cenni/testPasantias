@@ -51,7 +51,7 @@ a:hover{
   width:100%;
   height:300px;
   background-color: rgba(61, 51, 51, 0.527);
-  top:450px;
+  top:50%;
   position:absolute;
 }
 .description-index-main{

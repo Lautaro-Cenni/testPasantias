@@ -1,5 +1,5 @@
 <template >
-    <div v-if="show" class="contaienr-all">
+    <div v-if="show" class="contaiener-all">
         <div class="route-box row">
                 <div class="col-lg-8 col-md-8 col-sh-8 col-xs-12 mx-3 route mx-auto">
                     <router-link class="back-to-store" to="/posts"><fa class="icon-arrow-left" icon="arrow-left"></fa> volver a la tienda </router-link>
@@ -9,23 +9,34 @@
         
         <div class="container">
             <div class="row">
-                
                 <Carousel
+                @next="next"
+                @prev="prev"
+                @paginationActive="paginationActive"
                 :images="images"
-                :car="car.detail.characteristics"
-                />
-                
-                <div class="container-form my-3 py-2 col-lg-6">
+                :car="car"
+                :visibleSlide="visibleSlide"
+                :direction="direction"
+            />
+                <div class="row container-form my-3 py-2 col-lg-6 col-md-12 mx-auto">
                     <div class="h3">
                         INGRESÁ TUS DATOS
                     </div>
                     <div class="form-text">Por favor completá el siguiente formulario para que uno de nuestros asesores se pueda contactar contigo
                     </div>
                     <div class="form">
-                        <div class="my-3 name row h-25 "><input class="form-input h-75" type="text" placeholder="NOMBRE Y APELLIDO"></div>
-                        <div class="my-3 mail row h-25 "><input class="form-input h-75" type="mail" placeholder=" CORREO ELECTRONICO"></div>
-                        <div class="my-3 phone row h-25 "><input class="form-input h-75" type="text" placeholder="TELEFONO"></div>
-                        <div class="my-3 row"><button class="btn btn-danger send">ENVIARME LA COTIZACIÓN POR MAIL</button></div>   
+                        <div class="my-3 name row h-25 ">
+                            <input class="form-input h-75" type="text" placeholder="NOMBRE Y APELLIDO">
+                        </div>
+                        <div class="my-3 mail row h-25 ">
+                            <input class="form-input h-75" type="mail" placeholder=" CORREO ELECTRONICO">
+                        </div>
+                        <div class="my-3 phone row h-25 ">
+                            <input class="form-input h-75" type="text" placeholder="TELEFONO">
+                        </div>
+                        <div class="my-3 row">
+                            <button class="btn btn-danger send">ENVIARME LA COTIZACIÓN POR MAIL</button>
+                        </div>   
                     </div>
                 </div>
             </div>
@@ -37,7 +48,7 @@
 </template>
 
 <script>
-import Carousel from '../../components/carrusel/carousel.vue';
+import Carousel from '../../components/carrusel/carouselconvue.vue'
 export default {
   components: { Carousel},
     data() {
@@ -45,8 +56,54 @@ export default {
             car: [],
             images:[],
             //show lo voy a utilizar para previsualizar una pantalla de carga mientras se generan los elementos
-            show: false
+            show: false,
+            visibleSlide:0,
+            direction:'left'
         }
+    },
+    methods:{
+        next(index){
+            if(this.visibleSlide === this.images.length-1){
+                this.visibleSlide=0
+                this.direction='beginning'
+            }else{
+                this.visibleSlide++
+                this.direction='right'
+            }
+            console.log(index)
+        },
+        prev(){
+            if(this.visibleSlide == 0){
+                this.visibleSlide=this.images.length-1
+                this.direction='end'
+            }else{
+                this.visibleSlide--
+                this.direction='left'
+            }
+        },
+        
+        paginationActive(index){
+            if(this.visibleSlide== this.images.length-1){
+                if(index==0){
+                    this.direction='beginning'
+                }else{
+                    this.direction='right'
+                }
+            }else if(this.visibleSlide==0){
+                if(index== this.images.length-1){
+                    this.direction='end'
+                }else{
+                    this.direction='left'
+                }
+
+            }else if(index < this.images.length-1){
+                this.direction='right'
+            }else{
+                this.direction='left'
+            }
+            this.visibleSlide=index
+        }
+        
     },
     async created(){
     
@@ -56,7 +113,6 @@ export default {
             this.images = data.gallery
             //una vez se cargan los elementos dedl api transformo show a true para quitar mi pantalla de carga y mostras mis elementos
             this.show = true
-            console.log(this.car)
         
         } catch (error) {
             console.log(error)
@@ -64,12 +120,12 @@ export default {
 
     }
 }
-/**/
 </script>
 
 <style>
-.contaienr-all{
-    height: 1000px;
+
+.contaiener-all{
+    height: 600px;
 }
 .route-box{
     height: 70px;
@@ -101,7 +157,6 @@ export default {
     background-color:#c3002f;
 }
 .container-form{
-    
     border-top: 1px solid #e3e2e2;
 }
 .form{
@@ -116,7 +171,16 @@ export default {
     font-size: 16px;
     color: #b5b5b5;
 }
-
+@media screen and (max-width:992px) {
+    .contaiener-all{
+    height: 1000px;
+}
+}
 </style>
 
-
+<!--
+import Carousel from '../../components/carrusel/carousel.vue';
+  <Carousel
+        :images="images"
+        :car="car.detail.characteristics"
+        /> -->

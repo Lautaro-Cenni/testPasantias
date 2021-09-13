@@ -1,6 +1,6 @@
 <template>
     <div class="container d-flex cards-container" >
-        <div v-if="show" class="row " >
+        <div v-if="show" class="row cards-box" >
             <Cards v-for="post of posts" 
                 :key="post.id"
                 :id="post.id"
@@ -55,6 +55,13 @@ export default {
 </script>
 
 <style>
+.cards-box{
+    margin-top:1rem;
+    margin-bottom:1rem;
+    position: relative;
+    display: flex;
+    justify-content:space-around;
+}
 @media screen and (min-width: 1147px){
     .cards-container{
         max-width: 80% !important;

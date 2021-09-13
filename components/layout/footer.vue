@@ -58,6 +58,8 @@ export default {
 
 footer{
     background-color:#e7e5db;
+    position:absolute;
+    top: 3000;
     
 }
 </style>
